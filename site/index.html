@@ -12,60 +12,71 @@
     </head>
     <body id="the-whole-page">
 
-        <nav class="navbar navbar-light bg-light">
+        <nav class="navbar navbar-light bg-light" role="navigation">
             <a class="navbar-brand task-logo" href="#">
             <img src="./logo.png" width="30" height="30" class="d-inline-block align-top" alt="Task Manager">
                 Task Manager
             </a>
         </nav>
-        
-        <div class="container mt-5">
+
+        <div class="container mt-5" data-bind="css: { waiting: isLoading }">
+            <div class="overlay-container" data-bind="visible: isLoading">
+                <div class="overlay" id="loading" >
+                  <div class="d-flex justify-content-center">
+                    <div class="spinner-border" role="status" >
+                      <span class="sr-only">Loading...</span>
+                    </div>
+                  </div>
+                </div>
+            </div>                       
             <div data-bind="visible: !isEditing()">
                 <label for="statusfilter">Filter by status</label>
                 <select class="form-select" aria-label="Select status" 
                     name="statusfilter"
                     data-bind="options: statuses, optionsText: $data, value: statusFilter">
                 </select>
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th scope="col">
-                                <a href="#" data-bind="click: sort.bind(null,'id')">
-                                    ID
-                                    <i class="fa fa-caret-up sort-icon" data-bind="visible: sortColumn() === 'id' && sortAscending()"></i>
-                                    <i class="fa fa-caret-down sort-icon" data-bind="visible: sortColumn() === 'id' && !sortAscending()"></i>
-                                </a>
-                            </th>
-                            <th scope="col">
-                                <a href="#" data-bind="click: sort.bind(null,'subject')">
-                                    Subject
-                                    <i class="fa fa-caret-up sort-icon" data-bind="visible: sortColumn() === 'subject' && sortAscending()"></i>
-                                    <i class="fa fa-caret-down sort-icon" data-bind="visible: sortColumn() === 'subject' && !sortAscending()"></i>                                    
-                                </a>
-                            </th>
-                            <th scope="col">
-                                <a href="#" data-bind="click: sort.bind(null,'status')">
-                                    Status
-                                    <i class="fa fa-caret-up sort-icon" data-bind="visible: sortColumn() === 'status' && sortAscending()"></i>
-                                    <i class="fa fa-caret-down sort-icon" data-bind="visible: sortColumn() === 'status' && !sortAscending()"></i>
-                                </a>
-                            </th>
-                            <th scope="col"></th>
-                        </tr>
-                    </thead>
-                    <tbody data-bind="foreach: filteredTasks">
-                        <tr data-bind="event: { mouseover: hovered, mouseout: unhovered }, css: { 'task-hover': isHovered() }">
-                            <th scope="row" data-bind="click: $root.edit"><a href="#" data-bind="text: id"></a></th>
-                            <td data-bind="click: $root.edit"><a href="#" data-bind="text: subject"></a></td>
-                            <td data-bind="text: status, click: $root.edit"></td>
-                            <td><button class="btn btn-danger" title="Delete" data-bind="click: $root.deleteTask"><i class="fa fa-trash" aria-hidden="true"></i></button></td>
-                        </tr>
-                    </tbody>
-                </table>
+                <div class="table-wrapper">
+                    <table class="table" role="grid">
+                        <thead>
+                            <tr>
+                                <th scope="col">
+                                    <a href="#" data-bind="click: sort.bind(null,'id')">
+                                        ID
+                                        <i class="fa fa-caret-up sort-icon" data-bind="visible: sortColumn() === 'id' && sortAscending()"></i>
+                                        <i class="fa fa-caret-down sort-icon" data-bind="visible: sortColumn() === 'id' && !sortAscending()"></i>
+                                    </a>
+                                </th>
+                                <th scope="col">
+                                    <a href="#" data-bind="click: sort.bind(null,'subject')">
+                                        Subject
+                                        <i class="fa fa-caret-up sort-icon" data-bind="visible: sortColumn() === 'subject' && sortAscending()"></i>
+                                        <i class="fa fa-caret-down sort-icon" data-bind="visible: sortColumn() === 'subject' && !sortAscending()"></i>                                    
+                                    </a>
+                                </th>
+                                <th scope="col">
+                                    <a href="#" data-bind="click: sort.bind(null,'status')">
+                                        Status
+                                        <i class="fa fa-caret-up sort-icon" data-bind="visible: sortColumn() === 'status' && sortAscending()"></i>
+                                        <i class="fa fa-caret-down sort-icon" data-bind="visible: sortColumn() === 'status' && !sortAscending()"></i>
+                                    </a>
+                                </th>
+                                <th scope="col"></th>
+                            </tr>
+                        </thead>
+                        <tbody data-bind="foreach: filteredTasks">
+                            <tr data-bind="event: { mouseover: hovered, mouseout: unhovered }, css: { 'task-hover': isHovered() }">
+                                <th scope="row" data-bind="click: $root.edit"><a href="#" data-bind="text: id, attr: {title: 'Task ' + id() + ': ' + subject()}"></a></th>
+                                <td data-bind="click: $root.edit"><a href="#" data-bind="text: subject, attr: {title: 'Task ' + id() + ': ' + subject()}"></a></td>
+                                <td data-bind="text: status, click: $root.edit, attr: {title: 'Task ' + id() + ': ' + subject()}"></td>
+                                <td><button class="btn btn-danger" title="Delete" data-bind="click: $root.deleteTask"><i class="fa fa-trash" aria-hidden="true"></i></button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
                 <button class="btn btn-primary" data-bind="click: add">Add a task</button>
             </div>
             <div data-bind="visible: isEditing">
-                <form class="was-validated" novalidate data-bind="css: { 'was-validated': isFormInvalid(), 'needs-validation': !isFormInvalid() }">
+                <form class="was-validated" role="form" novalidate data-bind="css: { 'was-validated': isFormInvalid(), 'needs-validation': !isFormInvalid() }">
                     <div class="form-group">
                       <label for="subject">Subject</label>
                       <input type="text" class="form-control" id="subject" required
@@ -86,9 +97,8 @@
                     <button type="button" class="btn btn-secondary" data-bind="click: cancelEdit">Cancel</button>
                     <button type="submit" class="btn btn-primary" data-bind="click: submitEdit">Submit</button>
                   </form>
-            </div>
-        </div>
-
+            </div>           
+        </div>        
         <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.5.1/knockout-latest.js" integrity="sha512-2AL/VEauKkZqQU9BHgnv48OhXcJPx9vdzxN1JrKDVc4FPU/MEE/BZ6d9l0mP7VmvLsjtYwqiYQpDskK9dG8KBA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
         <script src="./scripts/app.js"></script>

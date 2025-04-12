@@ -1,7 +1,13 @@
 .task-logo {
     margin-left: 5%;
 }
-table, .btn {
+.table-wrapper, form {
+    padding: 10px;
+    background-color: #fff;
+    border-radius: 8px;
+    margin-top: 1rem;
+}
+.btn {
     margin-top: 1rem;
 }
 .btn-danger {
@@ -19,4 +25,22 @@ a {
 }
 .task-hover {
     cursor: pointer;
+}
+#the-whole-page {
+    background-image: url("./../images/bg.jpg");
+}
+.overlay-container{
+    position: absolute;
+    width: 100%;
+    height: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.waiting {
+    opacity: calc(.5);
+}
+.spinner-border {
+    width: 4rem; 
+    height: 4rem;
 }

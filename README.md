@@ -1,5 +1,5 @@
 # pr-task-mgr
-This is a simple task manager webapp. On the client side, it uses the [knockout.js](https://knockoutjs.com/) framework. To demonstrate a fully functional server/client application, I overengineered it to run in a Docker container. This isn't necessary to see the front end, though. There's no ajax/fetch use, and no database. State is stored in the browser's localStorage.
+This is a simple task manager webapp. On the client side, it uses the [knockout.js](https://knockoutjs.com/) framework, and also [Bootstrap 5](https://getbootstrap.com/). To demonstrate a fully functional server/client application, I overengineered it to run in a Docker container. This isn't necessary to see the front end, though. There's no ajax/fetch use, and no database, but there is a simulated delay, as though the app is making async requests. State is stored in the browser's localStorage.
 
 # Building and running
 To run with a true server environment, you'll need Docker. On Windows, just run
