@@ -4,7 +4,7 @@ This is a simple task manager webapp. On the client side, it uses the [knockout.
 # Building and running
 To run with a true server environment, you'll need Docker. On Windows, just run
 ```
-build.bat
+run.bat
 ```
 Then, in your browser, navigate to http://localhost:9000
 
@@ -17,6 +17,13 @@ If you don't have Docker and just want to see the page, go to the `site` folder 
 * Tasks can be edited (subject and status).
 * The grid view can be filtered by task status.
 * When saving a task, the subject is required.
+* Tasks are sortable by ID, subject, and status
+
+#When you're done
+You should probably delete the Docker container and image. On Windows, run
+```
+stop.bat
+```
 
 # Thank you, eComSystems.
 This was fun!

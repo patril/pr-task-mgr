@@ -90,8 +90,14 @@ const prr = (() => {
             this.sortAscending = ko.observable(true);
             this.sortColumn = ko.observable('id');
 
-            if (window.localStorage.length) {
-                const keys = Object.getOwnPropertyNames(localStorage).map(key => parseInt(key)).sort();
+            const lsKeys = {};
+            for (let ls in window.localStorage) {
+                if (!isNaN(ls)) {
+                    lsKeys[ls] = window.localStorage[ls];
+                }
+            }
+            if (Object.getOwnPropertyNames(lsKeys).length) {
+                const keys = Object.getOwnPropertyNames(lsKeys).map(key => parseInt(key)).sort();
                 keys.forEach(key => {
                     const val = JSON.parse(window.localStorage.getItem(key));
                     const task = new Task();
