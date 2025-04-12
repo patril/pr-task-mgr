@@ -19,7 +19,7 @@ If you don't have Docker and just want to see the page, go to the `site` folder 
 * When saving a task, the subject is required.
 * Tasks are sortable by ID, subject, and status
 
-#When you're done
+# When you're done
 You should probably delete the Docker container and image. On Windows, run
 ```
 stop.bat
