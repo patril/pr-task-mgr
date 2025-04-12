@@ -1,0 +1,22 @@
+{
+  "name": "pr-task-mgr",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/patril/pr-task-mgr.git"
+  },
+  "author": "Patrick Riley",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/patril/pr-task-mgr/issues"
+  },
+  "homepage": "https://github.com/patril/pr-task-mgr#readme",
+  "dependencies": {
+    "express": "^5.1.0"
+  }
+}

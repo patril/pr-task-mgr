@@ -1,0 +1,22 @@
+.task-logo {
+    margin-left: 5%;
+}
+table, .btn {
+    margin-top: 1rem;
+}
+.btn-danger {
+    margin: 0;
+    font-size: x-small;
+}
+a {
+    text-decoration: none;
+}
+.task-status {
+    margin-top: 1rem;
+}
+.sort-icon {
+    margin-left: 6px;
+}
+.task-hover {
+    cursor: pointer;
+}
